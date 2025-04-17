@@ -1,0 +1,341 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lincoln #44 – La Maison d'Hôtes du Rabbi</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="css/language-switcher.css">
+<style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Fraunces', serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    background-color: transparent;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('brick-wall.jpg') center center / cover no-repeat;
+    z-index: -1;
+    pointer-events: none;
+    transform: scale(1.1);
+  }
+  .top-header {
+    background-color: white;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .logo {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: black;
+    transition: width 0.3s ease;
+  }
+
+  .logo:hover::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 15px 25px;
+    min-width: 180px;
+    animation: dropdownFade 0.3s ease;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+    margin: 8px 0;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: #555;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  @keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-wrapper {
+    padding: 80px 30px 60px;
+    max-width: 1100px;
+    margin: 60px auto 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .details-box h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+
+  .details-box p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .book-button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .book-button:hover {
+    background-color: #333;
+  }
+
+  .scroll-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 60px 20px 40px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 20px;
+    justify-content: center;
+  }
+
+  .scroll-gallery::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .scroll-gallery::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 5px;
+  }
+
+  .gallery-item {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    text-align: center;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item p {
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .calendar-rules-section {
+    margin-top: 80px;
+    padding: 40px;
+  }
+
+  .calendar-rules-section h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .calendar-container iframe {
+    flex: 1 1 500px;
+    min-width: 300px;
+    height: 500px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .rules-box {
+    flex: 1 1 400px;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+  }
+
+  .rules-box h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .rules-box ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.8;
+  }
+
+  @media (max-width: 768px) {
+    .details-box h1 {
+      font-size: 36px;
+    }
+
+    .details-box p {
+      font-size: 18px;
+    }
+
+    .book-button {
+      font-size: 16px;
+      padding: 12px 28px;
+    }
+
+    .scroll-gallery {
+      padding: 40px 10px 20px;
+      gap: 10px;
+      scroll-snap-type: x mandatory;
+    }
+
+    .gallery-item {
+      flex: 0 0 90%;
+      margin: 0 auto;
+    }
+
+    .gallery-item img {
+      height: 180px;
+    }
+
+    .gallery-item p {
+      font-size: 18px;
+      margin-top: 35px;
+    }
+  }
+</style>
+
+</head>
+<body>
+  <nav class="top-header">
+    <a href="index-fr.html" class="logo">La Maison d'Hôtes du Rabbi</a>
+    <div class="language-switcher">
+      <button class="lang-switch" data-lang="en">EN</button>
+      <button class="lang-switch" data-lang="fr">FR</button>
+      <button class="lang-switch" data-lang="he">HE</button>
+    </div>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+    <div class="nav-links">
+      <a href="index-fr.html">Accueil</a>
+      <a href="index-fr.html#contact">Contact</a>
+      <a href="index-fr.html#testimonials">Témoignages</a>
+      <a href="unionhouse-fr.html">La Maison Union</a>
+      <a href="lincoln32-fr.html">Lincoln #42</a>
+      <a href="lincoln34-fr.html">Lincoln #44</a>
+      <a href="transportation-fr.html">Transport</a>
+      <a href="booking-fr.html">Réserver Maintenant</a>
+    </div>
+  </nav>
+
+  <section class="content-wrapper">
+    <div class="details-box">
+      <h1>Lincoln #44</h1>
+      <p>Situé à quelques pas du 770, Lincoln #44 est l'une de nos maisons d'hôtes les plus spacieuses et confortables. Elle peut accueillir jusqu'à <strong>25 invités</strong>, ce qui la rend idéale pour les grandes familles ou les groupes souhaitant passer Chabbat ensemble dans un environnement chaleureux et 'Hassidique.</p>
+      <p>La maison dispose de <em>(chambres et salles de bains à déterminer – veuillez mettre à jour)</em>, d'une cuisine cachère complète et d'un sous-sol aménagé. Elle est équipée de draps, serviettes et essentiels pour Chabbat comme une plaque chauffante et une urne d'eau chaude. Vous apprécierez également la proximité des synagogues et commerces locaux.</p>
+      <p>Il existe également une option pour réserver uniquement <strong>l'unité du sous-sol</strong>, qui peut accueillir confortablement jusqu'à <strong>4 personnes</strong>. C'est un excellent choix pour les petits groupes ou ceux qui recherchent un séjour plus économique.</p>
+      <p>Nous nous efforçons de faire en sorte que votre séjour se sente comme à la maison – que vous veniez pour une simcha, un Chabbaton, ou simplement pour passer du temps dans le quartier du Rabbi.</p>
+      <a href="booking-fr.html?room=lincoln734" class="book-button">Réserver Maintenant</a>
+    </div>
+  </section>
+
+  <div class="scroll-gallery-wrapper">
+    <div class="scroll-gallery">
+      <div class="gallery-item"><img src="lincoln44.jpg" alt="Lincoln #44"><p>Lincoln #44</p></div>
+      <div class="gallery-item"><img src="bedroom.jpg" alt="Chambre"><p>Chambre</p></div>
+      <div class="gallery-item"><img src="bedroom2.jpg" alt="Chambre 2"><p>Chambre 2</p></div>
+      <div class="gallery-item"><img src="kitchen.jpg" alt="Cuisine"><p>Cuisine</p></div>
+    </div>
+  </div>
+
+  <section class="calendar-rules-section">
+    <h2>Disponibilité & Règles de la Maison</h2>
+    <div class="calendar-container">
+      <iframe 
+        src="https://calendar.google.com/calendar/embed?src=6d6ebb70289a02589f68d41d8ec0d7ac3c2d1fd8db0522bfefe66c3b41d70343%40group.calendar.google.com&ctz=America%2FNew_York">
+      </iframe>
+      <div class="rules-box">
+        <h3>Règles de la Maison</h3>
+        <ul>
+          <li>🚭 <strong>Interdiction de fumer</strong> dans toute la propriété</li>
+          <li>🚫 <strong>Alcool non autorisé</strong></li>
+          <li>🕰 L'enregistrement se fait avant 12h00</li>
+          <li>🕰 Le départ se fait avant 11h00</li>
+        </ul>
+      </div>
+    </div>
+  </section>
+  
+  <script src="js/language-switcher.js"></script>
+</body>
+</html>

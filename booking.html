@@ -1,0 +1,315 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Book Your Stay – The Rebbe’s Guesthouse</title>
+ <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200&display=swap" rel="stylesheet">
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+   body {
+  font-family: 'Fraunces', serif;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  min-height: 100vh;
+  overflow-x: hidden;
+}
+
+body::before {
+  content: "";
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 100vh;
+  width: 100vw;
+  background: url('brick-wall.jpg') center center / cover no-repeat;
+  z-index: -1;
+  pointer-events: none;
+  transform: scale(1.1);
+  will-change: transform;
+}
+
+@media (max-width: 768px) {
+  body::before {
+    transform: scale(1);
+    background-position: center top;
+  }
+}
+
+
+   .top-header {
+  background-color: white;
+  padding: 15px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  position: sticky;
+  top: 0;
+  z-index: 1000;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+.logo {
+  font-weight: 600;
+  font-size: 20px;
+  color: black;
+  text-decoration: none;
+  position: relative;
+}
+
+.logo::after {
+  content: '';
+  position: absolute;
+  bottom: -2px;
+  left: 0;
+  width: 0;
+  height: 2px;
+  background: black;
+  transition: width 0.3s ease;
+}
+
+.logo:hover::after {
+  width: 100%;
+}
+
+.menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: black;
+  padding: 0;
+  margin: 0;
+  outline: none;
+  appearance: none;          /* Remove native styling in WebKit */
+  -webkit-appearance: none;  /* Safari/Chrome */
+  -moz-appearance: none;     /* Firefox */
+}
+
+.menu-toggle:focus,
+.menu-toggle:hover {
+  background: none;
+  outline: none;
+  box-shadow: none;
+}
+
+
+.nav-links {
+  display: none;
+  flex-direction: column;
+  position: absolute;
+  top: 70px;
+  right: 20px;
+  background-color: #fff;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+  border-radius: 12px;
+  padding: 15px 25px;
+  min-width: 180px;
+  animation: dropdownFade 0.3s ease;
+}
+
+.nav-links a {
+  text-decoration: none;
+  color: #222;
+  font-size: 16px;
+  margin: 8px 0;
+  transition: color 0.3s;
+}
+
+.nav-links a:hover {
+  color: #555;
+}
+
+.nav-links.active {
+  display: flex;
+}
+
+@keyframes dropdownFade {
+  from { opacity: 0; transform: translateY(-10px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+  .menu-toggle {
+  font-size: 28px;
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: black;
+}
+ .form-container {
+      background: rgba(255, 255, 255, 0.96);
+      padding: 40px;
+      border-radius: 20px;
+      max-width: 600px;
+      margin: 100px auto;
+      box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+    }
+
+    .form-container h1 {
+      text-align: center;
+      font-size: 36px;
+      margin-bottom: 30px;
+    }
+
+    form {
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+    }
+
+    label {
+      font-weight: 600;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    input[type="tel"],
+    input[type="date"],
+    textarea {
+      padding: 12px 15px;
+      font-size: 16px;
+      border-radius: 10px;
+      border: 1px solid #ccc;
+      font-family: 'Fraunces', serif;
+    }
+
+    textarea {
+      resize: vertical;
+    }
+
+    .checkbox-group {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      background: #f7f7f7;
+      padding: 15px;
+      border-radius: 12px;
+    }
+
+    .checkbox-group label {
+      font-weight: 400;
+      display: flex;
+      align-items: center;
+      font-size: 15px;
+    }
+
+    .checkbox-group input[type="checkbox"] {
+      margin-right: 10px;
+    }
+
+    button {
+      background-color: black;
+      color: white;
+      padding: 14px;
+      font-size: 16px;
+      border: none;
+      border-radius: 30px;
+      cursor: pointer;
+      transition: background 0.3s;
+    }
+
+    button:hover {
+      background-color: #333;
+    }
+
+    footer {
+      background-color: #f5f5f5;
+      padding: 20px;
+      text-align: center;
+      font-family: 'Fraunces', serif;
+    }
+  </style>
+</head>
+ <script>
+  document.querySelectorAll('.nav-links a').forEach(link => {
+    link.addEventListener('click', () => {
+      document.querySelector('.nav-links').classList.remove('active');
+    });
+  });
+</script>
+
+<body>
+
+ <nav class="top-header">
+  <a href="index.html" class="logo">The Rebbe’s GuestHouse</a>
+  <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+  <div class="nav-links">
+    <a href="index.html">Home</a>
+    <a href="#contact">Contact</a>
+    <a href="#testimonials">Testimonials</a>
+    <a href="unionhouse.html">The Union House</a>
+    <a href="lincoln32.html">Lincoln #42</a>
+    <a href="lincoln34.html">Lincoln #44</a>
+    <a href="transportation.html">Transportation</a>
+    <a href="booking.html">Book Now</a>
+  </div>
+</nav>
+
+  <div class="form-container">
+    <h1>Book Your Stay</h1>
+    <form action="https://usebasin.com/f/c6e0109d8b37" method="POST">
+      <input type="hidden" name="_template" value="table" />
+      <input type="hidden" name="_captcha" value="false" />
+      <input type="hidden" name="_next" value="thankyou.html" />
+
+      <label for="first-name">First Name *</label>
+      <input type="text" id="first-name" name="First Name" required />
+
+      <label for="last-name">Last Name *</label>
+      <input type="text" id="last-name" name="Last Name" required />
+
+      <label for="email">Email *</label>
+      <input type="email" id="email" name="Email" required />
+
+      <label for="phone">Phone *</label>
+      <input type="tel" id="phone" name="Phone" required />
+
+      <label>Choose Your Stay *</label>
+      <div class="checkbox-group">
+        <label><input type="checkbox" name="Stay[]" value="The Union House (1850$ A Night)"> The Union House (1850$ A Night)</label>
+        <label><input type="checkbox" name="Stay[]" value="Lincoln #42 (1850$ A Night)"> Lincoln #42 (1850$ A Night)</label>
+        <label><input type="checkbox" name="Stay[]" value="Lincoln #44 (1850$ A Night)"> Lincoln #44 (1850$ A Night)</label>
+        <label><input type="checkbox" name="Stay[]" value="Transportation"> Transportation</label>
+        <label><input type="checkbox" name="Stay[]" value="The Union House Basement (400$)"> The Union House Basement (400$)</label>
+        <label><input type="checkbox" name="Stay[]" value="Lincoln #42 Basement (400$)"> Lincoln #42 Basement (400$)</label>
+        <label><input type="checkbox" name="Stay[]" value="Lincoln #44 Basement (400$)"> Lincoln #44 Basement (400$)</label>
+      </div>
+
+      <label for="checkin">Check In *</label>
+      <input type="date" id="checkin" name="Check In" required />
+
+      <label for="checkout">Check Out *</label>
+      <input type="date" id="checkout" name="Check Out" required />
+
+      <label for="requests">Special Requests</label>
+      <textarea id="requests" name="Special Requests" rows="4"></textarea>
+
+      <button type="submit">Submit</button>
+    </form>
+  </div>
+
+  <footer>
+    © 2025 The Rebbe’s Guesthouse | Built with care by Nighttime Website Development
+  </footer>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelectorAll('.nav-links a').forEach(link => {
+        link.addEventListener('click', () => {
+          document.querySelector('.nav-links').classList.remove('active');
+        });
+      });
+    });
+  </script>
+</body>
+</html>
+

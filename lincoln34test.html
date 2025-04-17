@@ -1,0 +1,398 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Lincoln #44 – The Rebbe’s Guesthouse</title>
+  <link rel="icon" href="favicon.png" type="image/png">
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,200&display=swap" rel="stylesheet">
+  <style>
+  * {
+    box-sizing: border-box;
+    font-family: 'Fraunces', serif;
+  }
+
+  body {
+    margin: 0;
+    padding: 0;
+    font-size: 20px;
+    background-color: transparent;
+    position: relative;
+  }
+
+  body::before {
+    content: "";
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background: url('brick-wall.jpg') center center / cover no-repeat;
+    z-index: -1;
+    pointer-events: none;
+    transform: scale(1.1);
+  }
+
+  .top-header {
+    background-color: white;
+    padding: 15px 25px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    position: sticky;
+    top: 0;
+    z-index: 1000;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.08);
+  }
+
+  .logo {
+    font-weight: 600;
+    font-size: 20px;
+    color: black;
+    text-decoration: none;
+    position: relative;
+  }
+
+  .logo::after {
+    content: '';
+    position: absolute;
+    bottom: -2px;
+    left: 0;
+    width: 0;
+    height: 2px;
+    background: black;
+    transition: width 0.3s ease;
+  }
+
+  .logo:hover::after {
+    width: 100%;
+  }
+
+  .menu-toggle {
+    font-size: 28px;
+    cursor: pointer;
+    background: none;
+    border: none;
+  }
+
+  .nav-links {
+    display: none;
+    flex-direction: column;
+    position: absolute;
+    top: 70px;
+    right: 20px;
+    background-color: #fff;
+    box-shadow: 0 12px 24px rgba(0, 0, 0, 0.15);
+    border-radius: 12px;
+    padding: 15px 25px;
+    min-width: 180px;
+    animation: dropdownFade 0.3s ease;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    color: #222;
+    font-size: 16px;
+    margin: 8px 0;
+    transition: color 0.3s;
+  }
+
+  .nav-links a:hover {
+    color: #555;
+  }
+
+  .nav-links.active {
+    display: flex;
+  }
+
+  @keyframes dropdownFade {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .content-wrapper {
+    padding: 80px 30px 60px;
+    max-width: 1100px;
+    margin: 100px auto 40px;
+    background: rgba(255, 255, 255, 0.9);
+    border-radius: 16px;
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.15);
+  }
+
+  .details-box h1 {
+    font-size: 48px;
+    margin-bottom: 30px;
+  }
+
+  .details-box p {
+    font-size: 20px;
+    line-height: 1.7;
+    margin-bottom: 25px;
+  }
+
+  .book-button {
+    margin-top: 30px;
+    padding: 14px 35px;
+    background-color: #000;
+    color: white;
+    border: none;
+    border-radius: 50px;
+    font-size: 18px;
+    cursor: pointer;
+    text-decoration: none;
+  }
+
+  .book-button:hover {
+    background-color: #333;
+  }
+
+  .rooms-section {
+    padding: 40px 20px;
+    margin-top: 60px;
+    margin-bottom: 60px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .section-title {
+    font-size: 42px;
+    color: white;
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.5);
+    text-align: center;
+    position: relative;
+    margin: 20px auto 30px;
+  }
+
+  .section-title::after {
+    content: "";
+    display: block;
+    width: 80px;
+    height: 4px;
+    background-color: white;
+    margin: 10px auto 0;
+    border-radius: 2px;
+  }
+
+  .scroll-gallery {
+    display: flex;
+    overflow-x: auto;
+    gap: 30px;
+    padding: 40px 20px 60px;
+    scroll-snap-type: x mandatory;
+    scroll-padding: 20px;
+    justify-content: center;
+  }
+
+  .scroll-gallery::-webkit-scrollbar {
+    height: 10px;
+  }
+
+  .scroll-gallery::-webkit-scrollbar-thumb {
+    background: #999;
+    border-radius: 5px;
+  }
+
+  .gallery-item {
+    flex: 0 0 300px;
+    scroll-snap-align: start;
+    text-align: center;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item p {
+    margin-top: 50px;
+    font-size: 20px;
+    font-weight: 600;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+  }
+
+  .calendar-rules-section {
+    margin-top: 40px;
+    padding: 40px 30px;
+  }
+
+  .calendar-rules-section h2 {
+    text-align: center;
+    font-size: 36px;
+    margin-bottom: 40px;
+    color: white;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  }
+
+  .calendar-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 40px;
+    justify-content: center;
+    max-width: 1200px;
+    margin: 0 auto;
+  }
+
+  .calendar-container iframe {
+    flex: 1 1 500px;
+    min-width: 300px;
+    height: 500px;
+    border: none;
+    border-radius: 12px;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+  }
+
+  .rules-box {
+    flex: 1 1 400px;
+    min-width: 280px;
+    background: rgba(255, 255, 255, 0.95);
+    padding: 30px 25px;
+    border-radius: 16px;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.1);
+    font-size: 20px;
+  }
+
+  .rules-box h3 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 20px;
+  }
+
+  .rules-box ul {
+    list-style: none;
+    padding-left: 0;
+    line-height: 1.8;
+  }
+
+@media (max-width: 768px) {
+  .details-box h1 {
+    font-size: 36px;
+  }
+
+  .details-box p {
+    font-size: 18px;
+  }
+
+  .book-button {
+    font-size: 16px;
+    padding: 12px 28px;
+  }
+
+  .rooms-section {
+    padding: 40px 10px 50px;
+    margin-top: 50px;
+    margin-bottom: 50px;
+  }
+
+  .scroll-gallery {
+    display: flex;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    gap: 20px;
+    padding: 30px 12vw; /* makes first/last item centered */
+    justify-content: flex-start;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  .scroll-gallery::-webkit-scrollbar {
+    display: none; /* Optional: hide scrollbar */
+  }
+
+  .gallery-item {
+    flex: 0 0 76vw; /* ensures 1 item fits */
+    scroll-snap-align: center;
+  }
+
+  .gallery-item img {
+    width: 100%;
+    height: 200px;
+    object-fit: cover;
+    border-radius: 12px;
+    box-shadow: 0 4px 14px rgba(0, 0, 0, 0.15);
+  }
+
+  .gallery-item p {
+    font-size: 16px;
+    margin-top: 10px;
+    color: white;
+    text-shadow: 1px 1px 4px rgba(0, 0, 0, 0.8);
+    text-align: center;
+  }
+}
+
+</style>
+
+</head>
+<body>
+  <nav class="top-header">
+    <a href="index.html" class="logo">The Rebbe’s GuestHouse</a>
+    <button class="menu-toggle" onclick="document.querySelector('.nav-links').classList.toggle('active')">☰</button>
+    <div class="nav-links">
+      <a href="index.html">Home</a>
+      <a href="index.html#contact">Contact</a>
+      <a href="index.html#testimonials">Testimonials</a>
+      <a href="unionhouse.html">The Union House</a>
+      <a href="lincoln32.html">Lincoln #42</a>
+      <a href="lincoln34.html">Lincoln #44</a>
+      <a href="transportation.html">Transportation</a>
+      <a href="booking.html">Book Now</a>
+    </div>
+  </nav>
+
+  <section class="content-wrapper">
+    <div class="details-box">
+      <h1>Lincoln #44</h1>
+      <p>        Located just steps from 770, Lincoln #44 is one of our most spacious and comfortable guesthouses. It can host up to <strong>25 guests</strong>, making it ideal for large families or groups looking to spend Shabbos together in a warm, Chassidish environment.</p>
+      <p>The house features <em>(TBD bedrooms and bathrooms – please update)</em>, a full kosher kitchen, and a finished basement. It’s stocked with linens, towels, and Shabbos essentials like a blech and hot water urn. You’ll also enjoy close proximity to local shuls and shops.</p>
+      <p>There is also an option to book just the <strong>basement unit</strong>, which comfortably sleeps up to <strong>4 people</strong>. This is a great choice for smaller groups or those looking for a more budget-friendly stay.</p>
+      <a href="booking.html?room=lincoln732" class="book-button">Book Now</a>
+    </div>
+  </section>
+<section class="rooms-section">
+  <h2 class="section-title">Our Room's</h2>
+  <div class="scroll-gallery">
+    <div class="gallery-item"><img src="union_1.jpg" alt="Living Room"><p>Living Room</p></div>
+    <div class="gallery-item"><img src="union_2.jpg" alt="Dining Area"><p>Dining Area</p></div>
+    <div class="gallery-item"><img src="union_3.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+    <div class="gallery-item"><img src="union_4.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+    <div class="gallery-item"><img src="union_5.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+    <div class="gallery-item"><img src="union_6.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+    <div class="gallery-item"><img src="union_7.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+    <div class="gallery-item"><img src="union_8.jpg" alt="Bedroom 1"><p>Bedroom 1</p></div>
+  </div>
+</section>
+
+  <section class="calendar-rules-section">
+  <h2>Availability & House Rules</h2>
+  <div class="calendar-container">
+    
+    <!-- Styled iframe container -->
+    <div style="flex: 1 1 500px; min-width: 300px; background: rgba(255,255,255,0.95); padding: 20px; border-radius: 16px; box-shadow: 0 4px 16px rgba(0,0,0,0.1);">
+      <iframe 
+        src="https://calendar.google.com/calendar/embed?src=therebbesguesthouse%40gmail.com&ctz=America%2FNew_York" 
+        style="border: 0; width: 100%; height: 500px; border-radius: 12px;" 
+        frameborder="0" 
+        scrolling="no">
+      </iframe>
+    </div>
+
+    <!-- House Rules -->
+    <div class="rules-box">
+      <h3>House Rules</h3>
+      <ul>
+        <li>🚭 <strong>No smoking</strong> anywhere on the premises</li>
+        <li>🚫 <strong>No alcohol</strong> permitted</li>
+        <li>🕰 Check-in is by 12:00 PM</li>
+        <li>🕰 Check-out is by 11:00 AM</li>
+      </ul>
+    </div>
+    
+  </div>
+</section>
+
+</body>
+</html>

@@ -1,0 +1,50 @@
+.language-switcher {
+  display: flex;
+  align-items: center;
+  margin-left: 15px;
+}
+
+.lang-switch {
+  background: none;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+  padding: 5px 8px;
+  margin: 0 3px;
+  cursor: pointer;
+  font-size: 14px;
+  transition: all 0.2s ease;
+}
+
+.lang-switch:hover {
+  background-color: #f5f5f5;
+}
+
+.lang-switch.active-lang {
+  background-color: #000;
+  color: white;
+  border-color: #000;
+}
+
+/* RTL support for Hebrew */
+html[dir="rtl"] .language-switcher {
+  margin-right: 15px;
+  margin-left: 0;
+}
+
+@media (max-width: 768px) {
+  .language-switcher {
+    position: absolute;
+    top: 15px;
+    right: 70px;
+  }
+  
+  html[dir="rtl"] .language-switcher {
+    left: 70px;
+    right: auto;
+  }
+  
+  .lang-switch {
+    padding: 3px 6px;
+    font-size: 12px;
+  }
+}
